@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styleCreate.css' %}">
+</head>
+<body>
+<br><br>
+<div align="center">
+    <h2>Create classroom</h2>
+</div>
+
+<div class="container">
+
+    <form method="POST" action='' enctype="multipart/form-data">
+        {% csrf_token %}
+        <section class='section-center'>
+        <form class='grocery-form'>
+            <p class='alert'></p>
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            <h3 style='text-align:center;'>Classroom</h3><br>
+            <div class='form-control'>
+                <input type='text' class ='grocery' name='name' placeholder="Classroom name">
+                <button name='gen' id='gen' class='btn submit-btn'>submit</button>
+            </div><br>
+            <div style='text-align:center;'>
+                <input name='myfile' type="file">Select photo</input><br>
+            </div><br>
+            <h3 style='text-align:center;'>Code:<br><br>{{password}}</p></h3><br>
+        </form>
+    </section>
+    </form>
+</div>
+
+</body>
+
+</html><br>
+{% endblock %}

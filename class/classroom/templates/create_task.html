@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/upload_task.css' %}">
+</head>
+<body>
+<br><br>
+<div align="center">
+    <h2>Create task</h2>
+</div>
+
+<div class="container">
+
+    <form method="POST" action='' enctype='multipart/form-data'>
+        {% csrf_token %}
+        <section class='section-center'>
+        <form class='grocery-form'>
+            <p class='alert'></p>
+            <h3 style='text-align:center;'>Classroom</h3><br>
+            <div class='form-control'>
+                <input type='text' class ='grocery' name='title' placeholder="Title">
+            </div><br>
+            <div class='form-control'>
+                <input type='text' class ='grocery' name='code' placeholder="Classroom code">
+            </div><br>
+            <div class='form-control'>
+                <input type='text' class ='grocery' name='topic' placeholder="Task Topic">
+            </div><br>
+            <div class='form-control'>
+                <textarea name='task' rows="6" cols="50" placeholder="Describe the task"></textarea>
+            </div><br>
+            <div style='text-align:center;'>
+                <label for="quantity">Maximum points:</label>
+                <input class='grocery' type="number" name="max"><br><br>
+            </div>
+            <div style='text-align:center;'>
+                <label for="quantity">Due date:</label>
+                <input class='grocery' type="date" name='date'><br><br>
+            </div>
+            <div style='text-align:center;'>
+                <input multiple class='grocery' name='myfile' type="file"><br>
+            </div><br>
+            <div class='form-control'>
+            <input name='submit' id='submit' type='submit' class='btn submit-btn'>
+            </div>
+        </form>
+    </section>
+    </section>
+    </form>
+</div>
+
+</body>
+
+</html><br>
+{% endblock %}

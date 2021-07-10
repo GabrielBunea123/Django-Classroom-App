@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<form method="POST" class="d-flex justify-content-center">
+    {% csrf_token %}
+  <div style='text-align:center;'>
+    <h1>Profile</h1>
+    <br>
+  <div class="card" style="width: 18rem;">
+    <img src="{{ user.profile.profile_pic.url}}">
+    <div class="card-body">
+      <h5 class="card-title">{{ user }}</h5>
+      <p class="card-text">{{user.profile.bio}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      {% if user.profile.github_url %}
+        <li class="list-group-item">
+            <a href="{{ user.profile.github_url }}" class='btn'><i class="fab fa-github"></i></a>
+          
+        </li>
+      {% endif %}
+      {% if user.profile.facebook_url %}
+        <li class="list-group-item">
+          <a href="{{ user.profile.facebook_url }}" class='btn'><i class="fab fa-facebook"></i></a>
+        </li>
+      {% endif %}
+      {% if user.profile.instagram_url %}
+        <li class="list-group-item">
+          <a href="{{ user.profile.instagram_url }}" class='btn'><i class="fab fa-instagram"></i></a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+</form>
+<br>
+<br>
+
+{% endblock %}

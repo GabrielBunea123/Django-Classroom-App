@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styleHome.css' %}">
+</head>
+<body>
+<br><br>
+<div align="center">
+    <h2>Join classroom</h2>
+</div>
+<div class="container">
+
+    <form id="post-form" method="POST" action="checkview">
+        {% csrf_token %}
+        <section class='section-center'>
+        <form class='grocery-form'>
+            <p class='alert'></p>
+            <h3 style='text-align:center;'>Classroom</h3><br>
+            <div class='form-control'>
+                <input type='text' class ='grocery' name="room_name" id="room_name" placeholder="Classroom Code">
+            </div><br>
+            <div class='form-control'>
+                <input type='text' class ='grocery' name="username" id="username" placeholder="Username">
+            </div><br>
+            <div class="d-flex justify-content-center">
+                <button name='gen' id='gen' class='btn submit-btn'>submit</button>
+            </div>
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </form>
+    </section>
+    </form>
+</div>
+
+
+</body>
+
+
+</html><br>
+{% endblock %}

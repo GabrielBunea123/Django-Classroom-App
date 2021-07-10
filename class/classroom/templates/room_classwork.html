@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load random_color %}
+<form method="POST" action="">
+{% csrf_token %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styleHome.css' %}">
+<div class="card bg-{% random_clr %} text-white text-center p-3">
+    <blockquote class="blockquote mb-0">
+      <h1>{{room_name}}</h1>
+      {% if current_user == room_details.author.id%}
+      <h4><a href="{% url "create_task" %}" <button class="btn btn-secondary">Create task</button></a><h4>
+      <h4><a href="{% url 'add_topic' room_details.code %}" <button class="btn btn-secondary">Add topic</button></a><h4>
+      <small style='float:right;'>Code:{{room}}</small>
+        {% endif %}
+    </blockquote>
+  </div><br><br>
+  <ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a href="{% url 'room' room_details.code %}" class="nav-link btn">Stream</a>
+  </li>
+    <li>
+    <h1>&nbsp;</h1>
+  </li>
+  {% comment %} <li class="nav-item">
+    <a href="{% url 'room_classwork' room_details.code %}" class="nav-link"></a>
+  </li> {% endcomment %}
+  <li class="nav-item">
+   <a href="{% url 'room_classwork' room_details.code %}" class="nav-link btn">Classwork</a>
+  </li>
+  
+</ul>
+{% comment %}change here !!!!  {% endcomment %}
+  {% for top in topic %}
+  <hr>
+    {%if  top.name %}
+    <div>
+      <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{top.name}}</h3>
+    </div>
+    {% endif %}
+      {% for item in tasks reversed %}
+      {% if top.name == item.topic%}
+      <div class="card text-center mx-auto" style='width:75%;'>
+      <a style='text-decoration:none;' href="{% url 'task' pk=item.id %}">
+      <div class="card-header">
+        Featured
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{item.title}}</h5>
+        <p class="card-text">{{item.task}}</p>
+        {% comment %} <a href="{% url 'task' pk=item.id %}" class="btn btn-primary">Details</a> {% endcomment %}
+      </div>
+      <div class="card-footer text-muted">
+        {{item.date}}
+      </div>
+      </a>
+    </div>
+    <br>
+    <div class="mx-auto" style='width:75%;'>
+    </div><br>
+    {% endif %}
+    {% endfor %}
+  {% endfor %}
+</div>
+</form>
+{% endblock %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styleHome.css' %}">
+</head>
+<body>
+<br><br>
+<div class='container'>
+    <h2>Returned homework</h2>
+</div><br>
+<div class="container">
+
+    <form "method=POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <table class="table table-bordered">
+    <tr class="table-secondary">
+    <td><center>Name</center></td>
+    <td><center>Homework</center></td>
+    </tr>
+    <tr>
+    {% for j in joined %}
+        <td><center>{{j.user}}</center></td>
+            {% if j.user %}
+                <td class=''><center><a href="{% url 'returned_details' pk j.user %}"
+                    <button class='btn'>See files</button>
+                </a></center></td></tr>
+            {% endif %}
+    {% endfor %}
+    
+</table>
+    </form>
+    
+</div>
+
+
+
+</body>
+
+
+</html><br>
+{% endblock %}

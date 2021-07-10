@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styleHome.css' %}">
+</head>
+<body>
+<br><br>
+<div align="center">
+    <h2>Task</h2>
+</div><br>
+<div class="container">
+
+    <form id='post-form' method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <div class='container'>
+            {% comment %} assignments and student's work {% endcomment %}
+        <div class="row justify-content-between">
+            <div class="col-sm-6 col-xs-7">
+            <div class='col-sm' style='display:inline-block;float:left;'>
+                <h3>{{task.title}}</h3>
+                <h5>Deadline: {{task.due_date}}</h5>
+                <small>Created by: {{task.author}}- Maximum points: {{task.max_points}}p.</small><br>
+                <small>{{task.date}}</small>
+                <hr>
+                <p style='width=50%;'>{{task.task}}</p>
+                {% comment %} <div class='form-control'>
+                    <input type='text' class ='grocery' name='message' placeholder="Add a private comment">
+                    <input name='submit' id='submit' type='submit' class='btn submit-btn'>
+                </div><br> {% endcomment %}
+                {% if request.user == task.author %}
+                    <div class="card border-info mb-3 mx-auto" style="max-width: 35rem;">
+                        <div class="card-header">Files <a href="{% url 'add_more_files' task.pk%}" <i class="fas fa-plus-circle"></i></a></div>
+                        <div class="card-body text-info" style='text-align:center;text-decoration:none;'>
+                            {% for i in files %}
+                                <p>{{i.file}} <a href='{{i.file.url}}' download class="card-title"><i class="fas fa-arrow-alt-circle-down"></i></a></p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                <div class="card border-info mb-3 mx-auto" style="max-width: 35rem;">
+                        <div class="card-header">Files</div>
+                        <div class="card-body text-info" style='text-align:center;text-decoration:none;'>
+                            {% for i in files %}
+                                <a href='{{i.file.url}}' download class="card-title">{{i.file}}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                {% comment %} <a download href='{{task.file.url}}'>{{task.file}}</a><br><br> {% endcomment %}
+                <input type="hidden" name="username" id="username" value="username"/>
+                <input type="hidden" name="room_id" id="room_id" value="{{task.id}}"/>
+                <div class='form-control'>
+                    <input class ='grocery' type="text" name="message" id="message" placeholder="Add comment" />
+                    <input name='submit' class='btn submit-btn' type="submit">
+                </div><br>
+            </div>
+            </div>
+            <div class="col-sm-4 col-xs-5">
+            <div class='col-sm' style='display:inline-block;float:right;'>
+                <div class="card text-center border-info mb-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Your homework</h5>
+                        <p class="card-text text-info">This is where all your work and added files will appear.</p>
+                        <a href="{% url 'add' task.pk%}" id="myButton" style='width:80%;' class="btn btn-primary">Add files</a>
+                        <p></p>
+                        {% for f in files %}
+                            {% if f.author == request.user %}
+                            <a href="{{ f.file.url }}" download>{{f.file}}</a>
+                            {% endif %}
+                        {% endfor %}<br>
+                        {% if not returned_files %}
+                            <p>There are no returned files</p>
+                        {% elif room.author == request.user and returned_files%}
+                            <br>
+                            <a href="{% url 'returned' task.pk%}" type='submit' id='mark' style='width:80%;' class="btn btn-primary" name='turn'>Returned</a>
+                        {% endif %}    
+                                
+                    </div>
+                </div>
+                <h4>Comments</h4>
+                    <div class="card text-center border-info mb-3 overflow-auto" style="width: 18rem; overflow-y:auto;max-height:230px;">
+                        <div class="card-body">
+                        <hr>
+                        {% for comm in messages %}
+                            <div>
+                                <div>
+                                    <div style='display:inline-block;'>{{comm.author}} -</div> 
+                                    <small style='display:inline-block;'>{{comm.date}}</small>
+                                    <div class='container'>{{comm.value}}</div> 
+                                </div>
+                            </div><hr>
+
+                        {% endfor %}
+                        </div>
+                      </div>
+                </div>
+            </div>
+            
+            
+            </div>
+            
+        </div>
+        </div>
+            
+    </form>
+    
+</div>
+
+</body>
+
+
+</html><br>
+{% endblock %}

@@ -1,0 +1,5 @@
+<footer>
+		<button class="btn"><a class="contact" href="https://www.facebook.com/excursiibikeacademy/?epa=SEARCH_BOX" target="_blank"><i class="fab fa-facebook">  Facebook</i></a></button>
+		<button class="btn"><a class="contact" href="https://www.google.ro/maps/place/Strada+1+Decembrie+1918+18,+Gherla+405300/@47.0269245,23.9057385,17z/data=!4m13!1m7!3m6!1s0x4749bda367821c21:0x230958637b59198b!2sStrada+1+Decembrie+1918+18,+Gherla+405300!3b1!8m2!3d47.0269771!4d23.90565!3m4!1s0x4749bda367821c21:0x230958637b59198b!8m2!3d47.0269771!4d23.90565" target="_blank"><i class="fas fa-search-location"> Locatia</i></a></button>
+		<button class="btn"><a class="contact" href="tel:0746257611"><i class="fa fa-address-card"> Dorin Farcas</i></button>
+	</footer>
