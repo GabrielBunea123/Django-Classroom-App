@@ -9,7 +9,6 @@
     <blockquote class="blockquote mb-0">
       <h1>{{room_name}}</h1>
       {% if current_user == room_details.author.id%}
-      <h4><a href="{% url "create_task" %}" <button class="btn btn-secondary">Create task</button></a><h4>
       <h4><a href="{% url 'add_topic' room_details.code %}" <button class="btn btn-secondary">Add topic</button></a><h4>
       <small style='float:right;'>Code:{{room}}</small>
         {% endif %}
