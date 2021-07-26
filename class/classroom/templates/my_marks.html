@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styleHome.css' %}">
+</head>
+<body>
+<br><br>
+<div class='container'>
+    <h2>My Grades</h2>
+</div><br>
+<div class="container">
+
+    <form "method=POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <table class="table table-bordered">
+    <tr class="table-secondary">
+    <td><center>Class</center></td>
+    <td><center>Grades</center></td>
+    </tr>
+    <tr>
+    {% for j in my_classes %}
+        <td><center>{{j.classroom_name}}</center></td>
+            {% if j.user %}
+                <td class=''><center><a href="#">
+                <div style='display:inline-block'>
+                    {% for i in marks %}
+                        {% if i.classroom_code == j.classroom_code %}
+                            <a href="{% url 'task' pk=i.task_number %}">{{i.mark}}</a><br>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                </a></center></td></tr>
+            {% endif %}
+    {% endfor %}
+    
+</table>
+    </form>
+    
+</div>
+
+
+
+</body>
+
+
+</html><br>
+{% endblock %}

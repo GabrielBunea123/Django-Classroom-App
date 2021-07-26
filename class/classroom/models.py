@@ -60,4 +60,12 @@ class Profile(models.Model):
     
     def get_absolute_url(self):
         return reverse("home")
+
+class Mark(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True,on_delete=models.CASCADE,)
+    classroom_code = models.CharField(max_length=200)
+    classroom_name = models.CharField(max_length=200)
+    mark = models.FloatField()
+    task_number = models.CharField(blank = True, null=True,max_length=200)
+
     

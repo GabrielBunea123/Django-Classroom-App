@@ -22,6 +22,7 @@
                         <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'home_page'%}"><i class="fas fa-home"></i> Home</a></li>
                         <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'join_room'%}"><i class="fas fa-user-friends"></i> Join Classroom</a></li>
                         <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'create_room'%}"><i class="far fa-plus-square"></i> Create Classroom</a></li>
+                        <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'my_grades'%}"><i class="fas fa-address-book"></i> My Grades</a></li>
                         <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'edit_profile'%}"><i class="fas fa-lock"></i> Confidential</a></li>
                         {% if user.profile.id %}
                             <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'show_profile_page' user.profile.id %}"><i class="far fa-user"></i> Profile</a></li>

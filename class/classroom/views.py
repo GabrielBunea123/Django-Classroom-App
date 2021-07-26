@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Room,Joined,Upload_Task,UploadFiles,Comments,Topic,UploadTaskFiles
+from .models import Room,Joined,Upload_Task,UploadFiles,Comments,Topic,UploadTaskFiles,Mark
 from django.contrib import messages
 from django.http import HttpResponse,HttpResponseRedirect
 import random
@@ -158,11 +158,23 @@ def returned(request,pk):
     joined = Joined.objects.filter(classroom_code =room_code)#totii elevi care au returnat tema 
     return render(request,'returned.html',{'students':students,'joined':joined,'pk':pk})
 
+
 @login_required(login_url='login')
 def returned_details(request,pk,string):
     files = UploadFiles.objects.filter(task_number=pk,author__username=string)# detalii despre fiecare tema a fiecarui elev
+    for i in files:
+        code = i.room_code
+        task = i.task_number
+
+    submit = request.GET.get('submit')
+    if(submit):
+        room = Room.objects.get(code = code)
+        mark = request.GET.get('mark')
+        Mark.objects.create(user=request.user,classroom_code=code,classroom_name=room.name,mark=mark,task_number=task)
+        return redirect('home_page')
     return render(request,'returned_details.html',{'files':files})
     
+
 @login_required(login_url='login')
 def add_topic(request,room):
     submit = request.POST.get('submit')
@@ -192,4 +204,12 @@ class AddMoreFiles(FormView):
             return self.form_invalid(form)
     def get_success_url(self,*args, **kwargs):
         return reverse('task',args=[self.kwargs['pk']])#returns the page with the old pk
+
+def my_grades(request):
+    my_classes = Joined.objects.filter(user = request.user)
+    for i in my_classes:
+        code = i.classroom_code
+    marks = Mark.objects.filter(user=request.user)
+    print(marks)
+    return render(request,"my_marks.html",{'my_classes':my_classes,'marks':marks})
 

@@ -19,4 +19,5 @@ urlpatterns = [
     path('returned_details/<int:pk>/<string>',views.returned_details,name='returned_details'),
     path('add_topic/<str:room>/',views.add_topic,name='add_topic'),
     path('add_more_files/<int:pk>',AddMoreFiles.as_view(),name='add_more_files'),
+    path('my_grades/',views.my_grades,name='my_grades')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
