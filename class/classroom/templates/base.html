@@ -1,73 +1,145 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <script src="https://kit.fontawesome.com/276ffed8b7.js" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
     {% load static %}
     <script src="{% static 'javascript/navbar.js' %}"></script>
-    <link rel="stylesheet" href=" {% static '/css/navbar.css' %}">
+    <link rel="stylesheet" href=" {% static '/css/navbar.css' %}" />
   </head>
   <title>Classroom</title>
   <body>
-      <div class="d-flex" id="wrapper">
-            <!-- Sidebar-->
-            {% if user.is_authenticated %}
-                <div class="border-end bg-white " id="sidebar-wrapper">
-                    <div class="sidebar-heading border-bottom bg-light">Menu</div>
-                    <ul class="list-group list-group-flush">
-                        <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'home_page'%}"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'join_room'%}"><i class="fas fa-user-friends"></i> Join Classroom</a></li>
-                        <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'create_room'%}"><i class="far fa-plus-square"></i> Create Classroom</a></li>
-                        <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'my_grades'%}"><i class="fas fa-address-book"></i> My Grades</a></li>
-                        <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'edit_profile'%}"><i class="fas fa-lock"></i> Confidential</a></li>
-                        {% if user.profile.id %}
-                            <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'show_profile_page' user.profile.id %}"><i class="far fa-user"></i> Profile</a></li>
-                            <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'edit_profile_page' user.profile.id %}"><i class="fas fa-pen"></i> Edit Profile</a></li>
-                        {% else %}
-                            <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'create_profile_page' %}"><i class="far fa-user"></i> Custom your profile</a></li>
-                        {% endif %}
-                        <li><a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'logout'%}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-                    </ul>
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar-->
+      {% if user.is_authenticated %}
+      <div class="border-end bg-white" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-light">Menu</div>
+        <ul class="list-group list-group-flush">
+          <li>
+            <a
+              class="list-group-item list-group-item-action list-group-item-light p-3"
+              href="{% url 'home_page'%}"
+              ><i class="fas fa-home"></i> Home</a
+            >
+          </li>
+          <li>
+            <a
+              class="list-group-item list-group-item-action list-group-item-light p-3"
+              href="{% url 'join_room'%}"
+              ><i class="fas fa-user-friends"></i> Join Classroom</a
+            >
+          </li>
+          <li>
+            <a
+              class="list-group-item list-group-item-action list-group-item-light p-3"
+              href="{% url 'create_room'%}"
+              ><i class="far fa-plus-square"></i> Create Classroom</a
+            >
+          </li>
+          <li>
+            <a
+              class="list-group-item list-group-item-action list-group-item-light p-3"
+              href="{% url 'my_grades'%}"
+              ><i class="fas fa-address-book"></i> My Grades</a
+            >
+          </li>
+          <li>
+            <a
+              class="list-group-item list-group-item-action list-group-item-light p-3"
+              href="{% url 'edit_profile'%}"
+              ><i class="fas fa-lock"></i> Confidential</a
+            >
+          </li>
+          {% if user.profile.id %} {% comment %}
+          <li>
+            <a
+              class="list-group-item list-group-item-action list-group-item-light p-3"
+              href="{% url 'show_profile_page' user.profile.id %}"
+              ><i class="far fa-user"></i> Profile</a
+            >
+          </li>
+          {% endcomment %}
+          <li>
+            <a
+              class="list-group-item list-group-item-action list-group-item-light p-3"
+              href="{% url 'edit_profile_page' user.profile.id %}"
+              ><i class="fas fa-pen"></i> Edit Profile</a
+            >
+          </li>
+          {% else %}
+          <li>
+            <a
+              class="list-group-item list-group-item-action list-group-item-light p-3"
+              href="{% url 'create_profile_page' %}"
+              ><i class="far fa-user"></i> Custom your profile</a
+            >
+          </li>
+          {% endif %}
+          <li>
+            <a
+              class="list-group-item list-group-item-action list-group-item-light p-3"
+              href="{% url 'logout'%}"
+              ><i class="fas fa-sign-out-alt"></i> Logout</a
+            >
+          </li>
+        </ul>
+      </div>
 
-
-                </div>
-
-
-                
-            {% else %}
-                <div class="border-end bg-white " id="sidebar-wrapper">
-                    <div class="sidebar-heading border-bottom bg-light">Menu</div>
-                    <div class="list-group list-group-flush">
-                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'register'%}"><i class="fas fa-registered"></i> Register</a>
-                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'login'%}"><i class="fas fa-sign-in-alt"></i> Login</a>
-                    </div>
-                </div>
-            {% endif %}
-            <!-- Page content wrapper-->
-            <div id="page-content-wrapper">
-                <!-- Top navigation-->
-                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                    <div class="container-fluid">
-                        <button class="sidebar-toggle btn btn-primary" id="sidebarToggle"><i class="fas fa-bars"></i></button>
-                    </div>
-                </nav>
-                <!-- Page content-->
-                <div class="container-fluid">
-                    {% block content %}
-
-                    {% endblock %}
-                </div>
-            </div>
+      {% else %}
+      <div class="border-end bg-white" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-light">Menu</div>
+        <div class="list-group list-group-flush">
+          <a
+            class="list-group-item list-group-item-action list-group-item-light p-3"
+            href="{% url 'register'%}"
+            ><i class="fas fa-registered"></i> Register</a
+          >
+          <a
+            class="list-group-item list-group-item-action list-group-item-light p-3"
+            href="{% url 'login'%}"
+            ><i class="fas fa-sign-in-alt"></i> Login</a
+          >
         </div>
+      </div>
+      {% endif %}
+      <!-- Page content wrapper-->
+      <div id="page-content-wrapper">
+        <!-- Top navigation-->
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
+        >
+          <div class="container-fluid">
+            <button class="sidebar-oggle btn" id="sidebarToggle">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </nav>
+        <!-- Page content-->
+        <div class="container-fluid">{% block content %} {% endblock %}</div>
+      </div>
+    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

@@ -6,25 +6,23 @@ from django import forms
 class Room(models.Model):
     name = models.CharField(max_length=200)
     code = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='room_images', height_field=None, width_field=None, max_length=100,null=True)
+    color = models.CharField(max_length=200, blank=True, null=True)
     author = models.ForeignKey(User, null=True, blank=True,on_delete=models.CASCADE,)
 class Joined(models.Model):
     user = models.ForeignKey(User, null=True, blank=True,on_delete=models.CASCADE,)
     classroom_code = models.CharField(max_length=200)
     classroom_name = models.CharField(max_length=200)
-    classroom_image = models.ImageField(upload_to='Joined', height_field=None, width_field=None, max_length=100,null=True)
+    classroom_color = models.CharField(max_length=200,null=True, blank=True)
 class Upload_Task(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200,blank=True)
     task = models.TextField(max_length=1000,blank = True,)
     room_code = models.CharField(max_length=200) 
-    # file = models.FileField(blank=True,upload_to='tasks')
     date = models.DateField(null=True)
     author = models.ForeignKey(User, null=True, blank=True,on_delete=models.CASCADE,)
     max_points = models.IntegerField(blank = True, null= True)
     due_date = models.DateField(blank=True,null=True)
     topic = models.CharField(blank=True,null=True,max_length=200)
-    # task_number = models.CharField(blank = True, null=True,max_length=200)
 class UploadTaskFiles(models.Model):
     file = models.FileField(blank=True,upload_to='tasks')
     task_number = models.CharField(blank = True, null=True,max_length=200)

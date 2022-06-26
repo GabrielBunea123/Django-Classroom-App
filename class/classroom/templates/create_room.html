@@ -3,42 +3,40 @@
 {% block content %}
 {% load crispy_forms_tags %}
 <html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/styleCreate.css' %}">
-</head>
-<body>
-<br><br>
-<div align="center">
-    <h2>Create classroom</h2>
-</div>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    </head>
+    <body>
 
-<div class="container">
+        <div class="container">
+            <form method="POST" action='' class="d-flex justify-content-center" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class='section-center'>
+                    <p class='alert'></p>
 
-    <form method="POST" action='' enctype="multipart/form-data">
-        {% csrf_token %}
-        <section class='section-center'>
-        <form class='grocery-form'>
-            <p class='alert'></p>
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-            <h3 style='text-align:center;'>Classroom</h3><br>
-            <div class='form-control'>
-                <input type='text' class ='grocery' name='name' placeholder="Classroom name">
-                <button name='gen' id='gen' class='btn submit-btn'>submit</button>
-            </div><br>
-            <div style='text-align:center;'>
-                <input name='myfile' type="file">Select photo</input><br>
-            </div><br>
-            <h3 style='text-align:center;'>Code:<br><br>{{password}}</p></h3><br>
-        </form>
-    </section>
-    </form>
-</div>
+                    <div align="center" class="pb-2">
+                        <h2>Create classroom</h2>
+                    </div>
 
-</body>
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                    <div class="d-flex justify-content-center p-3">
+                        <input type='text' class="form-control" name='name' placeholder="Classroom name">
+                    </div>
+                    <div class="d-flex justify-content-center pb-5">
+                        <button name='gen' id='gen' class='btn btn-primary'>Create</button>
+                    </div>
+                    {% if password  %}
+                        <h3 style='text-align:center;'>Code:<br><br>{{password}}</p></h3><br>
+                    {%endif%}
+                </div>
+            </form>
+        </div>
 
-</html><br>
+    </body>
+
+</html>
 {% endblock %}

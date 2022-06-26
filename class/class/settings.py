@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'classroom',
     'crispy_forms',
-    'members'
+    'members',
 ]
 STATICFILES_DIRS = [
     'Users/User/Desktop/Javascript and Python/Python Projects/Python/Classroom django/class/classroom/static',

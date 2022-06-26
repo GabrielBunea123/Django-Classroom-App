@@ -67,8 +67,7 @@ Global Styles
   box-sizing: border-box;
 }
 body {
-  font-family: var(--ff-secondary);
-  background: var(--clr-grey-10);
+  /* background: var(--clr-grey-10); */
   color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
@@ -95,18 +94,23 @@ h4 {
   line-height: 1.25;
   margin-bottom: 0.75rem;
   font-family: var(--ff-primary);
+  /* color: var(--clr-grey-1); */
 }
 h1 {
   font-size: 3rem;
+  /* color: var(--clr-grey-1); */
 }
 h2 {
   font-size: 2rem;
+  /* color: var(--clr-grey-1); */
 }
 h3 {
   font-size: 1.25rem;
+  /* color: var(--clr-grey-1); */
 }
 h4 {
   font-size: 0.875rem;
+  /* color: var(--clr-grey-1); */
 }
 p {
   margin-bottom: 1.25rem;
@@ -135,40 +139,21 @@ p {
     line-height: 1;
   }
 }
-/*  global classes */
 
-.btn {
-  text-transform: uppercase;
-  background: transparent;
-  color: var(--clr-black);
-  padding: 0.375rem 0.75rem;
-  letter-spacing: var(--spacing);
-  display: inline-block;
-  transition: var(--transition);
-  font-size: 0.875rem;
-  border: 2px solid var(--clr-black);
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  border-radius: var(--radius);
-}
-.btn:hover {
-  color: var(--clr-white);
-  background: var(--clr-black);
-}
-/* section */
 .section {
   padding: 5rem 0;
 }
 
 .section-center {
   width: 90vw;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   max-width: 35rem;
-  margin-top: 8rem;
+  margin-top: 5rem;
 }
+
 @media screen and (min-width: 992px) {
   .section-center {
-    width: 95vw;
+    width: 90vw;
   }
 }
 main {
@@ -177,19 +162,18 @@ main {
   place-items: center;
 }
 /*
-=============== 
-Grocery List
-===============
-*/
+  =============== 
+  Grocery List
+  ===============
+  */
 .section-center {
   background: var(--clr-white);
   border-radius: var(--radius);
-  box-shadow: var(--light-shadow);
+  box-shadow: var(--dark-shadow);
   transition: var(--transition);
   padding: 2rem;
-}
-.section-center:hover {
-  box-shadow: var(--dark-shadow);
+  padding-top: 5px;
+  padding-bottom: 1rem;
 }
 .alert {
   margin-bottom: 1rem;
@@ -210,32 +194,9 @@ Grocery List
   color: #155724;
   background: #d4edda;
 }
-.grocery-form h3 {
-  color: var(--clr-primary-1);
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-.form-control {
-  display: flex;
-  justify-content: center; 
-}
-.grocery {
-  padding: 0.25rem;
-  padding-left: 1rem;
-  background: var(--clr-grey-10);
-  border-top-left-radius: var(--radius);
-  border-bottom-left-radius: var(--radius);
-  border-color: transparent;
-  font-size: 1rem;
-  flex: 1 0 auto;
-  color: var(--clr-grey-5);
-}
-.grocery::placeholder {
-  font-family: var(--ff-secondary);
-  color: var(--clr-grey-5);
-}
 .submit-btn {
-  background: var(--clr-green-light);
+  background: var(--clr-primary-5);
+  color: var(--clr-white);
   border-color: transparent;
   flex: 0 0 5rem;
   display: grid;
@@ -243,86 +204,26 @@ Grocery List
   padding: 0.25rem;
   text-transform: capitalize;
   letter-spacing: 2px;
-  border-top-right-radius: var(--radius);
-  border-bottom-right-radius: var(--radius);
   cursor: pointer;
   content: var(--clr-primary-5);
   transition: var(--transition);
   font-size: 0.85rem;
 }
 .submit-btn:hover {
-  background: var(--clr-primary-5);
+  background: var(--clr-primary-4);
   color: var(--clr-white);
 }
+.card-task{
+  width:18rem;
+}
+@media screen and (max-width: 400px) {
+  .card-task{
+    width: 16rem;
+  }
+}
+@media screen and (max-width: 350px) {
+  .card-task{
+    width: 100%;
+  }
+}
 
-.grocery-container {
-  margin-top: 2rem;
-  transition: var(--transition);
-  visibility: hidden;
-}
-.show-container {
-  visibility: visible;
-}
-.grocery-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-  transition: var(--transition);
-  padding: 0.25rem 1rem;
-  border-radius: var(--radius);
-  text-transform: capitalize;
-}
-.grocery-item:hover {
-  color: var(--clr-grey-5);
-  background: var(--clr-grey-10);
-}
-.grocery-item:hover .title {
-  color: var(--clr-grey-5);
-}
-.title {
-  margin-bottom: 0;
-  color: var(--clr-grey-1);
-  letter-spacing: 2px;
-  transition: var(--transition);
-}
-.edit-btn,
-.delete-btn {
-  background: transparent;
-  border-color: transparent;
-  cursor: pointer;
-  font-size: 0.7rem;
-  margin: 0 0.15rem;
-  transition: var(--transition);
-}
-.edit-btn {
-  color: var(--clr-green-light);
-}
-.edit-btn:hover {
-  color: var(--clr-green-dark);
-}
-.delete-btn {
-  color: var(--clr-red-light);
-}
-.delete-btn:hover {
-  color: var(--clr-red-dark);
-}
-.clear-btn {
-  text-transform: capitalize;
-  width: 10rem;
-  height: 1.5rem;
-  display: grid;
-  align-items: center;
-  background: transparent;
-  border-color: transparent;
-  color: var(--clr-red-light);
-  margin: 0 auto;
-  font-size: 0.85rem;
-  letter-spacing: var(--spacing);
-  cursor: pointer;
-  transition: var(--transition);
-  margin-top: 1.25rem;
-}
-.clear-btn:hover {
-  color: var(--clr-red-dark);
-}

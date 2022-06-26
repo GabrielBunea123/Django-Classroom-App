@@ -2,23 +2,20 @@
 {% block content %}
 <br>
 
-{% for item in all_rooms %}
-    <div class="card d-inline-block" style="width: 20rem;">
-    <form method='POST' enctype='multipart/form-data'>
-    {% load static %}
-    {% if item.classroom_image %}
-      <img height=175 width=150 id="myimage" class="card-img-top" alt="{{item.classroom_image.url}}" src="{{item.classroom_image.url}} ">
-    {% else %}
-      {% load random_image%}
-      <img height=175 width=100 id="myimage" class="card-img-top" alt="The photo didn't load" src="{% static ''%}{% random_img %}">
-    {% endif %}
-      <div class="card-body">
+<div class="d-flex flex-wrap">
+
+  {% for item in all_rooms %}
+    <div class="card shadow-sm bg-body rounded mx-3 my-3" style="width: 20rem;">
+      <div class="card-header" style="background-color:{{item.classroom_color}};color:white">
         <h5 class="card-title">{{item.classroom_name}}</h5>
+      </div>
+      <div class="card-body pt-5">
+        <div class="card-text">Classroom code: <p class="fw-bold">{{item.classroom_code}}</p></div>
         <a href='{% url 'room' item.classroom_code %}' class="btn btn-primary">Go to class</a>
-        
       </div>
     </div>
-</form>
-{% endfor %}
+  {% endfor %}
+
+</div>
 
 {% endblock %}

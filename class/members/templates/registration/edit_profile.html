@@ -6,7 +6,7 @@
 <br/>
 <form method="POST" class="form-group d-flex justify-content-center">
     {% csrf_token %}
-    <div>
+    <div class="container">
         {{form | crispy}}
         <br/>
         <button type="submit" class="btn btn-primary">Edit profile</button>

@@ -1,56 +1,54 @@
 {% extends 'base.html' %}
 {% block content %}
-{% load random_color %}
 <form method="POST" action="">
-{% csrf_token %}
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/styleHome.css' %}">
-<div class="card bg-{% random_clr %} text-white text-center p-3">
+  {% csrf_token %}
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+  <div class="card text-white text-center p-3" style="background-color:{{room_details.color}};color:white">
     <blockquote class="blockquote mb-0">
-      <h1>{{room_name}}</h1>
       {% if current_user == room_details.author.id%}
-      <h4><a href="{% url 'add_topic' room_details.code %}" <button class="btn btn-secondary">Add topic</button></a><h4>
-      <small style='float:right;'>Code:{{room}}</small>
-        {% endif %}
+        <div class="dropdown" style='position:absolute;right:0;top:0'>
+          <button class="btn text-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            {% comment %} Dropdown button {% endcomment %}
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="{% url 'add_topic' room_details.code %}">Add topic</a></li>
+            <li><a class="dropdown-item" href="{% url "create_task" room_details.code %}">Create task</a></li>
+          </ul>
+        </div>
+      {% endif %}
+      <h2 class="text-bg-white">{{room_name}}</h2>
+      <small class="text-bg-white" style='float:right;'>Code:{{room}}</small>
     </blockquote>
   </div><br><br>
   <ul class="nav justify-content-center">
-  <li class="nav-item">
-    <a href="{% url 'room' room_details.code %}" class="nav-link btn">Stream</a>
-  </li>
-  {% comment %} <li class="nav-item">
-    <a href="{% url 'room_classwork' room_details.code %}" class="nav-link"></a>
-  </li> {% endcomment %}
-  <li>
-    <h1>&nbsp;</h1>
-  </li>
-  <li class="nav-item">
-    <a href="{% url 'room_classwork' room_details.code %}" class="nav-link btn">Classwork</a>
-  </li>
-</ul><br>
-  {% for item in tasks reversed %}
-  
-  <div class="card text-center mx-auto" style='width:75%;'>
-  <a style='text-decoration:none;' href="{% url 'task' pk=item.id %}">
-  <div class="card-header">
-    Featured
+    <li class="nav-item">
+      <a href="{% url 'room' room_details.code %}" class="btn btn-outline-primary">Stream</a>
+    </li>
+    <li>
+      <h1>&nbsp;</h1>
+    </li>
+    <li class="nav-item">
+      <a href="{% url 'room_classwork' room_details.code %}" class="btn btn-outline-primary">Classwork</a>
+    </li>
+  </ul><br>
+  <div class="container">
+    <hr>
+    <div>
+      <h3>Stream</h3>
+    </div>
+    {% for item in tasks reversed %}
+      <a href="{% url 'task' pk=item.id %}" class="list-group-item list-group-item-action shadow-sm bg-body rounded p-3 my-4" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{item.title}}</h5>
+          <small>Posted {{item.date}}</small>
+        </div>
+        <p class="mb-1">{{item.task|slice:":100"|safe}}</p>
+        <small>Due date {{item.date}}</small>
+      </a>
+    {% endfor %}
   </div>
-  <div class="card-body">
-    <h5 class="card-title">{{item.title}}</h5>
-    <p class="card-text">{{ item.task|slice:":100"|safe }}</p>
-    {% comment %} <a href="{% url 'task' pk=item.id %}" class="btn btn-primary">Details</a> {% endcomment %}
-  </div>
-  <div class="card-footer text-muted">
-    {{item.date}}
-  </div>
-  </a>
-</div>
-<br>
-<div class="mx-auto" style='width:75%;'>
-<hr>
-</div><br>
-{% endfor %}
-</div>
 </form>
 
 {% endblock %}

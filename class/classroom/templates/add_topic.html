@@ -2,34 +2,29 @@
 {% extends 'base.html' %}
 {% block content %}
 <html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/styleHome.css' %}">
-</head>
-<body>
-<div class="container">
-
-    <form method="POST">
-        {% csrf_token %}
-        <section class='section-center'>
-        <form class='grocery-form'>
-            <p class='alert'></p>
-            <h3 style='text-align:center;'>Add topic</h3><br>
-            <div class='form-control'>
-                <input type='text' class ='grocery' name="topic" id="topic" placeholder="Topic name">
-            </div><br>
-            <div class="d-flex justify-content-center">
-                <input name='submit' class='btn submit-btn' type='submit'></input>
-            </div>
-        </form>
-    </section>
-    </form>
-</div>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <form method="POST" class="d-flex justify-content-center">
+                {% csrf_token %}
+                <section class='section-center'>
+                    <div class='grocery-form'>
+                        <p class='alert'></p>
+                        <h3 style='text-align:center;'>Add topic</h3><br>
+                        <input type='text' class="form-control" name="topic" id="topic" placeholder="Topic name">
+                        <div class="d-flex justify-content-center">
+                            <input name='submit' class='btn btn-primary mt-3' type='submit'></input>
+                        </div>
+                    </div>
+                </section>
+            </form>
+        </div>
+    </body>
 
 
-</body>
-
-
-</html><br>
+</html>
 {% endblock %}

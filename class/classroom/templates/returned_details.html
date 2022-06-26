@@ -2,50 +2,42 @@
 {% extends 'base.html' %}
 {% block content %}
 <html>
-<head>
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/styleHome.css' %}">
-</head>
-<body>
-<br><br>
-<div class="container">
-    <form "method=POST" enctype='multipart/form-data'>
-        {% csrf_token %}
-            {% if files %}
-                <h2>Turned in files</h2>
-                {% for file in files%}
-                    {% if file.file %}
-                        <div class="card border-info mb-3 mx-auto" style="max-width: 35rem;">
-                            <div class="card-header">File</div>
-                            <div class="card-body text-info" style='text-align:center;text-decoration:none;'>
-                                <a href='{{file.file.url}}' download class="card-title">{{file.file}}</a>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    </head>
+    <body>
+        <br><br>
+        <div class="container d-flex justify-content-center">
+            <form "method=POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {% if files %}
+                    <h2 class="pb-5" style="text-align:center">Returned files by {{username}}</h2>
+                    <div class="card shadow-sm bg-body rounded mb-5" style="max-width: 35rem;">
+                        {% for file in files%}
+                            {% if file.file %}
+                                <div class="card-body text-info" style='text-align:center;text-decoration:none;'>
+                                    <a href='{{file.file.url}}' download class="card-title">{{file.file}}</a>
+                                </div>
+                            {% else %}
+                                <h3 class="d-flex justify-content-center">There are no files returned</h3>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="container mb-4 mt-4">
+                            <input type='number' name="mark" id="mark" class='form-control mb-3' placeholder="Grade">
+                            <div class="d-flex justify-content-center">
+                                <input name='submit' id='submit' type='submit' class='btn btn-primary' value="Return">
                             </div>
                         </div>
-                    {% else %}
-                        <br><br><br><br><br>
-                        <h3 class="d-flex justify-content-center">There are no files attached by this user</h3>
-                    {% endif %}
-                {% endfor %}
-            {% else %}
-            <br><br><br><br><br>
-                <h3 class="d-flex justify-content-center">There are no files returned by this user</h3>
-            {% endif %}
-            <div class='section-center'>
-                <div style="text-align:center;">
-                    <input type='number' name="mark" id="mark" class='grocery' placeholder="Grade"><br><br>
-                    <div class="d-flex justify-content-center">
-                        <input name='submit' id='submit' type='submit' class='btn submit-btn'>
                     </div>
-                </div><br>
-            </div>
-        
-    </form>
-</div>
+                {% else %}
+                    <h3 class="d-flex justify-content-center">There are no files returned by this user</h3>
+                {% endif %}
+                
+            </form>
+        </div>
 
-
-
-</body>
-
+    </body>
 
 </html><br>
 {% endblock %}

@@ -1,30 +1,33 @@
 {% extends 'base.html'%}
 {% load crispy_forms_tags %}
 {% block content %}
+
 {% if user.is_authenticated %}
     {% if user.id == profile.user.id %}
-<h1>Edit profile page</h1>
-<div class='form-group'>
-    <form class="form-group" method="POST" enctype='multipart/form-data'>
-        {% csrf_token %}
-        {{form.as_p}}
-        <br/>
-        <button type="submit" class="btn btn-primary">Update profile page</button>
-</div>
-</form>
+    <div class="mt-4">
+        <form class="form-group d-flex justify-content-center" method="POST" enctype='multipart/form-data'>
+            <div class="container">
+                {% csrf_token %}
+                {{form | crispy}}
+                <br/>
+                <button type="submit" class="btn btn-primary">Update profile page</button>
+            </div>
+        </form>
+    </div>
     {% else %}
-    <p>u are not the correct user</p>
+        <p>You are not the correct user</p>
     {% endif %}
 {% else %}
-<br>
-<br>
-<h3 style="text-align:center;">You are not logged in.Please <a href="{% url 'login'%}">log in first</a></h3>
-<br>
-<br>
-<h3 style="text-align:center;">Do not have an account?<a href="{% url 'register' %}">Create one here</a></h3>
+
+    <br>
+    <br>
+    <h3 style="text-align:center;">You are not logged in.Please <a href="{% url 'login'%}">log in first</a></h3>
+    <br>
+    <br>
+    <h3 style="text-align:center;">Do not have an account?<a href="{% url 'register' %}">Create one here</a></h3>
 {% endif%}
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
 
 {% endblock %}
